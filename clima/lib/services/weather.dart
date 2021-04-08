@@ -1,4 +1,26 @@
+import 'package:clima/services/location.dart';
+import 'package:clima/services/networking.dart';
+import 'package:clima/utilities/constants.dart';
+
 class WeatherModel {
+  Future<dynamic> getCityWeather(String city) async{
+    NetworkHelper networkHelper = NetworkHelper("$kOpenWeatherURL?&q=$city"
+        "&appid=$kApiKey&units=imperial");
+    return await networkHelper.getData();
+  }
+  
+  Future<dynamic> getLocationWeather() async {
+    Location location = Location();
+    await location.getLocation();
+
+    NetworkHelper networkHelper = NetworkHelper(
+        "$kOpenWeatherURL?lat=${location.latitude}"
+            "&lon=${location.longitude}&appid=$kApiKey&units=imperial"
+    );
+
+    return await networkHelper.getData();
+  }
+
   String getWeatherIcon(int condition) {
     if (condition < 300) {
       return '🌩';
@@ -20,11 +42,11 @@ class WeatherModel {
   }
 
   String getMessage(int temp) {
-    if (temp > 25) {
+    if (temp > 77) {
       return 'It\'s 🍦 time';
-    } else if (temp > 20) {
+    } else if (temp > 60) {
       return 'Time for shorts and 👕';
-    } else if (temp < 10) {
+    } else if (temp < 40) {
       return 'You\'ll need 🧣 and 🧤';
     } else {
       return 'Bring a 🧥 just in case';
