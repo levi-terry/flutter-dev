@@ -16,6 +16,29 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   String password;
   bool showSpinner = false;
 
+  void _showDialog(var e) {
+    // flutter defined function
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          title: new Text("Error"),
+          content: new Text(e),
+          actions: <Widget>[
+            // usually buttons at the bottom of the dialog
+            new TextButton(
+              child: new Text("Close"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -69,6 +92,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         showSpinner = true;
                       });
                       try {
+                        if (password.length < 6) {
+                          throw ("Password needs to be at least 6 characters");
+                        }
                         UserCredential newUser =
                             await _auth.createUserWithEmailAndPassword(
                                 email: email, password: password);
@@ -84,6 +110,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         } else if (e.code == 'wrong-password') {
                           print('Wrong password provided for that user.');
                         }
+                      } catch (e) {
+                        setState(() {
+                          showSpinner = false;
+                        });
+                        _showDialog(e);
                       }
                     },
                     buttonText: "Register",
