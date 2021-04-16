@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "698006335810",
+    "project_id": "fire-chat-34ddd",
+    "storage_bucket": "fire-chat-34ddd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:698006335810:android:b5825b633adf21c89258db",
+        "android_client_info": {
+          "package_name": "com.ldterry.flash_chat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "698006335810-t4qs5lpte32a6e00ff73os969hutco8p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyButtT3Jlqj1-3o1OWcJA5WVk8swJReKbU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "698006335810-t4qs5lpte32a6e00ff73os969hutco8p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
