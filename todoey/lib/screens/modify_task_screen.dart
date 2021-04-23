@@ -53,8 +53,10 @@ class ModifyTaskScreen extends StatelessWidget {
               padding: const EdgeInsets.only(top: 8.0),
               child: TextButton(
                 onPressed: () {
-                  context.read<Tasks>().editTask(index, newTaskText);
-                  Navigator.pop(context);
+                  if (newTaskText != null) {
+                    context.read<Tasks>().editTask(index, newTaskText);
+                    Navigator.pop(context);
+                  }
                 },
                 child: Text(
                   "Edit",

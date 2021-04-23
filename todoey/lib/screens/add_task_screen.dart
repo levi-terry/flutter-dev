@@ -50,8 +50,10 @@ class AddTaskScreen extends StatelessWidget {
               padding: const EdgeInsets.only(top: 8.0),
               child: TextButton(
                 onPressed: () {
-                  context.read<Tasks>().addTask(newTaskText);
-                  Navigator.pop(context);
+                  if (newTaskText != null) {
+                    context.read<Tasks>().addTask(newTaskText);
+                    Navigator.pop(context);
+                  }
                 },
                 child: Text(
                   "Add",
