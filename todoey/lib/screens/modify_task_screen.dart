@@ -3,10 +3,24 @@ import 'package:todoey/constants.dart';
 import 'package:provider/provider.dart';
 import 'package:todoey/models/tasks.dart';
 
-class ModifyTaskScreen extends StatelessWidget {
+class ModifyTaskScreen extends StatefulWidget {
   final int index;
 
   ModifyTaskScreen(this.index);
+
+  @override
+  _ModifyTaskScreenState createState() => _ModifyTaskScreenState();
+}
+
+class _ModifyTaskScreenState extends State<ModifyTaskScreen> {
+  TextEditingController _textEditingController;
+
+  @override
+  void initState() {
+    super.initState();
+    _textEditingController = new TextEditingController(
+        text: context.read<Tasks>().tasks[widget.index].taskText);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +59,7 @@ class ModifyTaskScreen extends StatelessWidget {
                 focusedBorder: kUnderlineBorder,
                 border: kUnderlineBorder,
               ),
+              controller: _textEditingController,
               onChanged: (newText) {
                 newTaskText = newText;
               },
@@ -54,12 +69,12 @@ class ModifyTaskScreen extends StatelessWidget {
               child: TextButton(
                 onPressed: () {
                   if (newTaskText != null) {
-                    context.read<Tasks>().editTask(index, newTaskText);
+                    context.read<Tasks>().editTask(widget.index, newTaskText);
                     Navigator.pop(context);
                   }
                 },
                 child: Text(
-                  "Edit",
+                  "Saved Changes",
                   style: TextStyle(
                     fontSize: 20,
                   ),
@@ -74,7 +89,7 @@ class ModifyTaskScreen extends StatelessWidget {
               padding: const EdgeInsets.only(top: 30.0),
               child: TextButton(
                 onPressed: () {
-                  context.read<Tasks>().deleteTask(index);
+                  context.read<Tasks>().deleteTask(widget.index);
                   Navigator.pop(context);
                 },
                 child: Text(
